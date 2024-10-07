@@ -1,0 +1,25 @@
+name: Python CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  Unit-Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5 
+        with:
+          python-version: 'pypy3.10'
+        
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt \
+          pip install pytest
+
+      - name: Run Unit test
+        run: pytest
+
+
